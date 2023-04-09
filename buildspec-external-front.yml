@@ -1,0 +1,21 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - yarn install
+  build:
+    commands:
+      - echo Build started on `date`
+      - yarn build
+      - echo Build completed on `date`
+  post_build:
+    commands:
+      - |
+        echo download completed.
+        echo Distributing to S3...
+        aws s3 sync dist s3://$prefix-external-front --delete --acl public-read --cache-control "max-age=0,no-cache,no-store,private"
+        echo deploy completed.
