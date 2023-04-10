@@ -17,5 +17,5 @@ phases:
       - |
         echo download completed.
         echo Distributing to S3...
-        aws s3 sync dist s3://$prefix-nature-external-front --delete --acl public-read --cache-control "max-age=0,no-cache,no-store,private"
+        aws s3 sync dist s3://dev-nature-external-front --delete --acl public-read --cache-control "max-age=0,no-cache,no-store,private"
         echo deploy completed.
